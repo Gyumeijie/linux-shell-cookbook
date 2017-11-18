@@ -1,0 +1,120 @@
+<?xml version=1.0 encoding=utf-8?>
+<machine architecture=sparc >
+  <device_description>
+    <device_entity type=gyroscope lid=gyroscope1>
+      <description>
+      <model>XM1</model>
+      <dataSize>2</dataSize>
+    </description>
+    <operation>
+<global name="global">
+  <para_list length="1" name="global">
+	 <para name="slave_address" type="char">0xD2</para>
+</para_list>
+</global>
+
+<op_list length="4">
+  <op name="gyroscope_open" template_id="0">
+    <para_list length="5" name="open_template0">
+      <para address="0x20">0x00</para>
+      <para address="0x21">0x00</para>
+      <para address="0x22">0x08</para>
+      <para address="0x23">0x03</para>
+      <para address="0x24">0x00</para>				  
+    </para_list>
+  </op>
+
+  <op name="gyroscope_getx" template_id="0">
+    <para_list length="2" name="getx_template0">
+      <para name="reg_address" type="char">0x28</para> 
+      <para name="size" type="int">2</para>
+    </para_list>				    
+  </op>
+
+  <op name="gyroscope_gety" template_id="0">
+    <para_list length="2" name="gety_template0">
+      <para name="reg_address" type="char">0x2c</para> 
+      <para name="size" type="int">2</para>
+    </para_list>
+  </op>
+
+  <op name="gyroscope_getz" template_id="0">
+    <para_list length="2" name="getz_template0">
+      <para name="reg_address" type="char">0x2f</para> 
+      <para name="size" type="int">2</para>
+    </para_list>
+  </op>
+</op_list>
+    </operation>
+    <dependence>i2c:001</dependence>
+   </device_entity>
+
+    <device_entity type=gyroscope lid=gyroscope2>
+      <description>
+        <model>XM</model>
+        <dataSize>4</dataSize>
+        <voltage>3.0v</voltage>
+      </description>
+      <operation>
+<op_list length="4">
+  <op name="magnetorquer_setx" template_id="0"> 
+    <para_list length="1" name="setx_template0">
+      <para type="int">4</para>
+    </para_list>
+  </op>
+  <op name="magnetorquer_sety" template_id="0"> 
+    <para_list length="1" name="sety_template0">
+      <para type="int">6</para>
+    </para_list>
+  </op>
+  <op name="magnetorquer_setz" template_id="0"> 
+    <para_list length="1" name="setz_template0">
+      <para type="int">9</para>
+    </para_list>
+  </op>
+  <op name="magnetorquer_setxyz" template_id="0"> 
+    <para_list length="3" name="setxyz_template0">
+      <para type="int">4</para>
+        <para type="int">6</para>
+        <para type="int">9</para>
+    </para_list>
+  </op>
+</op_list>
+      </operation>
+    <dependence>da:002</dependence>
+
+    </device_entity>
+    <device_entity type=flywheel lid=flywheel1>
+      <description>
+        <model>XM</model>
+        <dataSize>4</dataSize>
+        <voltage>2.0v</voltage>
+      </description>
+      <operation>
+<op_list length="2">
+  <op name="flywheel_set_speed" template_id="0">
+    <para_list length="6" name="flywheel_set_speed_template0">
+      <para occupied_by="constant">0xD3</para> 
+      <para occupied_by="constant">2</para>
+      <para occupied_by="computed" size="4" compute_id="0"></para>
+      <para occupied_by="constant">0x5B</para>
+      <para occupied_by="checksum"></para>
+      <para occupied_by="computed" size="3" compute_id="3"></para>
+    </para_list>
+  </op>
+  <op name="flywheel_receive" template_id="0">
+     <para_list length="6" name="flywheel_receive_template0">
+       <para start="0" num_byte="4"></para> 
+       <para start="4" num_byte="4"></para> 
+       <para start="8" num_byte="3"></para> 
+       <para start="11" num_byte="3"></para> 
+       <para start="14" num_byte="1"></para> 
+       <para start="15" num_byte="1"></para> 
+     </para_list>
+  </op>
+</op_list>
+      </operation>
+      <dependence>i2c:002</dependence>
+    </device_entity>
+  </device_description>
+</machine>

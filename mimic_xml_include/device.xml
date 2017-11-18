@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<machine architecture="sparc" >
+  <device_description>
+    <device_entity type="gyroscope" lid="gyroscope1">
+      <description>
+      <model>XM1</model>
+      <dataSize>2</dataSize>
+    </description>
+    <operation>
+    include gyroscope1.xml
+    </operation>
+    <dependence>i2c:001</dependence>
+   </device_entity>
+
+    <device_entity type="gyroscope" lid="gyroscope2">
+      <description>
+        <model>XM</model>
+        <dataSize>4</dataSize>
+        <voltage>3.0v</voltage>
+      </description>
+      <operation>
+      include gyroscope2.xml
+      </operation>
+    <dependence>da:002</dependence>
+
+    </device_entity>
+    <device_entity type="flywheel" lid="flywheel1">
+      <description>
+        <model>XM</model>
+        <dataSize>4</dataSize>
+        <voltage>2.0v</voltage>
+      </description>
+      <operation>
+      include flywheel1.xml
+      </operation>
+      <dependence>i2c:002</dependence>
+    </device_entity>
+  </device_description>
+</machine>
