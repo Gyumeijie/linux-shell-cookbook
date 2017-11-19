@@ -1,0 +1,6 @@
+	use{int i;}
+         action{ 
+         if ( i <= 3 )
+         result = *(int*)para;
+         result = result * 2 + 1;
+        }
