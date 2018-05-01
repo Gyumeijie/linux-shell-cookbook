@@ -6,3 +6,4 @@ record some bash snippets
 - [string variable operations](./basic/string_variable_operation.sh)
 - [escape special characters for xml file](./xml_escape)
 - [mimic xml include functionaliy](./mimic_xml_include)
+- [zero-start range generating](./basic/eval.sh)
