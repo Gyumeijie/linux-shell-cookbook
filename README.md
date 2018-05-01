@@ -7,3 +7,4 @@ record some bash snippets
 - [escape special characters for xml file](./xml_escape)
 - [mimic xml include functionaliy](./mimic_xml_include)
 - [zero-start range generating](./basic/eval.sh)
+- [array_slice](./basic/array_slice.sh)
