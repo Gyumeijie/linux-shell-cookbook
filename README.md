@@ -1,5 +1,5 @@
-# Intro
-record some bash snippets
+# Introduction
+This repository records some bash snippets and some commonly occuring errors with corresponding solutions.
 
 # The snippets list
 - [nested function](./basic/nested_function.sh)
