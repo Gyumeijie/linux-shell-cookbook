@@ -49,3 +49,34 @@ declare -i integer
 integer=1+1
 echo $integer # 2
 ```
+
+## Arithmetic evaluation
+The shell allows arithmetic expressions to be evaluated, under certain circumstances:
+- let  builtin command
+```bash
+x=1
+
+let y=$x+1
+z=$x+1
+
+echo $y # 2
+echo $z # 1+1
+```
+
+- declare  builtin command
+```bash
+declare -i integer
+integer=1+1
+echo $integer # 2
+```
+
+- Arithmetic Expansion 
+
+> Syntax: $((expression))
+
+```bash
+x=1
+y=9
+echo $(( (x+1)*(y+1) )) # 20
+```
+> In `$(( ))` we don't need to use `$id`, using `id` alone is allowed.
