@@ -80,3 +80,55 @@ y=9
 echo $(( (x+1)*(y+1) )) # 20
 ```
 > In `$(( ))` we don't need to use `$id`, using `id` alone is allowed.
+
+
+# Parameters
+## Positional Parameters
+A ***positional parameter*** is a parameter denoted by one or more digits, other than the single digit 0.
+
+Positional parameters are assigned from the shell's arguments when it is invoked, and may be reassigned using
+the **set** builtin command.
+
+```
+#! /bin/bash
+
+set "new value"
+echo "$1" 
+# result: "new value"
+```
+
+Note that positional parameters may not be assigned to with `assignment statements`:
+```bash
+#! /bin/bash
+
+1="new value"
+# result: "Error: 1=new value: command not found"
+```
+since **identifier** is a word consisting only of alphanumeric characters and underscores, and beginning with an alphabetic
+character or an underscore. The `1` alone can not be a valid identifier.
+
+The positional parameter can be also used in some forms of ***parameter expansion***:
+```bash
+#! /bin/bash
+
+# given $1 is '/home/tmp'
+echo ${1%/*} 
+# result: "/home"
+
+# given no parameters provided
+echo "${1:?The '$1' is unset}" 
+# result: "The $1 is unset"
+
+# given $1 is "$1 is a string"
+echo "${#1}"
+# result: "14"
+```
+
+For we cann't assign the positional parameter, the following expansion is not allowed:
+```bash
+#! /bin/bash
+
+echo ${1:="assin default values"}
+# result: "Error:  cannot assign in this way"
+```
+
