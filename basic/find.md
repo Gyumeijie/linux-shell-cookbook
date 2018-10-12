@@ -2,6 +2,7 @@
 ```bash
 find . -name "filename" -exec ls -l {} \;
 ```
+> The semicolon ';' is the commands separator, we should escape it by `\` or `';'` or `";"` before pass it to the `find` command.
 
 # Rename files which match some pattern in batch 
 Given the following files, then we need to rename them by removing the suffix of "?14145143".
