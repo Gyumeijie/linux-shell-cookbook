@@ -47,8 +47,7 @@ And following is the content of the exec.sh file:
 
 ```bash
 #!/bin/bash
-file=$1
-mv $file ${file%\?*}
+mv $1 ${1%\?*}
 ```
 
 We can deal with more complicated situations by using ```sed``` or similar tools which can leverage regular expression, 
