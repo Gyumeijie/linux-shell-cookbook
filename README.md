@@ -6,7 +6,3 @@ This repository records some bash snippets and some commonly occuring errors wit
 - [string variable operations](./basic/string_variable_operation.sh)
 - [zero-start range generating](./basic/eval.sh)
 - [array_slice](./basic/array_slice.sh)
-
-# The apps list
-- [escape special characters for xml file](./apps/xml_escape)
-- [mimic xml include functionaliy](./apps/mimic_xml_include)
