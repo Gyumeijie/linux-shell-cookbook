@@ -15,7 +15,7 @@ echo "filename" | ls -l  # not work
 echo "filename" | xargs ls -l # works
 ```
 
-**xargs** is a command that is very useful in handling `standard input data` to the `command-line argument` **conversions** :star:. 
+**xargs** is a very useful command in handling `standard input data` to the `command-line argument` **conversions** :star:. 
 
 Also, xargs can convert any one-line or multiple-line text inputs into other formats, such as multiple lines(specified number of columns) or a single line and vice versa.
 
@@ -96,3 +96,75 @@ Hence, we should use `-print0` along with find to explicitly produce an output w
 ```bash
 $ find . -type f -name "*.txt" -print0 | xargs -0 rm -f
 ```
+### Caveats
+
+##### #1 `-n` vs `-I {}`
+
+`-I {}` specifies the replacement string. For each of the arguments supplied for the
+command, the `{}` string will be replaced with arguments read through stdin.
+
+The default command is `echo` if no command specified, and argument(s) provided to the command is determined by `-n`:
+```bash
+echo -e "1\n2\n3\n4\n5" | xargs -tpr -n 2 
+
++ xargs -tpr -n 2
++ echo -e '1\n2\n3\n4\n5'
+echo 1 2 ?...
+echo 3 4 ?...
+echo 5 ?...
+```
+
+Explicitly provide a command instead of the default command `echo`, and argument(s) provided to the command is still determined by `-n`:
+```bash
+$ echo -e "1\n2\n3\n4\n5" | xargs -tpr -n 2 ls
+
++ xargs -tpr -n 2 ls
++ echo -e '1\n2\n3\n4\n5'
+ls 1 2 ?...
+ls 3 4 ?...
+ls 5 ?...
+```
+
+Explicitly provide a command and the argument(denoted by repalcement string {}), so the `-n` will be "overridden":
+
+```bash
+echo -e "1\n2\n3\n4\n5" | xargs -tpr -n 2 -I {} ls {}
+
++ xargs -tpr -n 2 -I '{}' ls '{}'
++ echo -e '1\n2\n3\n4\n5'
+ls 1 ?...
+ls 2 ?...
+ls 3 ?...
+ls 4 ?...
+ls 5 ?...
+```
+> So the `-n` should not use with the `-I {}`.
+
+Another difference between `-n` and `-I{}` is the "default delimiter" applied to split arguments.
+
+```bash
+$ echo -e "1 2\n3\n4 5" | xargs -tpr -n 2
++ xargs -tpr -n 2
++ echo -e '1 2\n3\n4 5'
+echo 1 2 ?...
+echo 3 4 ?...
+echo 5 ?...
+```
+The default delimiter for `-n` includes space(' ') and newline('\n').
+
+```bash
+$ echo -e "1 2\n3\n4 5" | xargs -tpr -I{} ls {}
++ xargs -tpr '-I{}' ls '{}'
++ echo -e '1 2\n3\n4 5'
+ls 1 2 ?...
+ls 3 ?...
+ls 4 5 ?...
+
+$ echo -e "1 2\n3\n4 5" | xargs -tpr -n 3 -I{} ls {}
++ xargs -tpr -n 3 '-I{}' ls '{}'
++ echo -e '1 2\n3\n4 5'
+ls 1 2 ?...
+ls 3 ?...
+ls 4 5 ?...
+```
+The default delimiter for `-I{}` olny includes the newline('\n').
