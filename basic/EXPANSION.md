@@ -3,7 +3,7 @@
 **Expansion** is performed on the command line after it has been split into words. There are seven kinds of
 expansion performed: `brace expansion`, `tilde expansion`, `parameter and variable expansion`, `command substitution`, `arithmetic expansion`, `word splitting`, and `pathname expansion`.
 
-The order of expansions is: brace expansion; tilde expansion, parameter and variable expansion, arithmetic
+The **order** of expansions is: brace expansion; tilde expansion, parameter and variable expansion, arithmetic
 expansion, and command substitution (done in a left-to-right fashion); word splitting; and pathname expansion
 
 Only `brace expansion`, `word splitting`, and `pathname expansion` can ***change the number of words of the
@@ -92,17 +92,18 @@ See below.
 
 
 #### Pattern Matching
-The speical pattern characters have the following meanings:
+Any character that appears in a pattern, other than the special **pattern characters** described below, matches
+itself. The speical pattern characters have the following meanings:
 - \*     
 Matches any ***string***, including the null string.
 - ?       
 Matches any single ***character***.
 - [...]      
-Matches any one the enclosed characters. A pair of characters separated by a hyphen(-) denotes a ***range expression***; any character that falls between those two characters, inclusive, is matched. If the first character following the `[` is a `!` or a `^` then any character not encolsed is matched.
+Matches any one the enclosed ***characters***. A pair of characters separated by a hyphen(-) denotes a ***range expression***; any character that falls between those two characters, inclusive, is matched. If the first character following the `[` is a `!` or a `^` then any character not encolsed is matched.
 
-Within `[` and `]`, ***character classes*** can be specified using the syntax [:class:], where class is one the following classes defined in the **POSIX standard**:
+Within `[` and `]`, ***character classes*** can be specified using the syntax `[:class:]`, where class is one the following classes defined in the **POSIX standard**:
 
-**alnum  alpha  ascii  blank  cntrl  digit  graph  lower  print  punct  space  upper  word  xdigit**
+**alnum   alpha   ascii   blank   cntrl   digit   graph   lower   print   punct   space   upper   word   xdigit**
 
 > Note that although `?` and `*` are quantifiers in regular expression, this isn't the case in shell globbing. 
 
