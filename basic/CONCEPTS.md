@@ -51,7 +51,7 @@ echo $integer # 2
 ```
 
 ## Arithmetic evaluation
-The shell allows arithmetic expressions to be evaluated, under certain circumstances:
+The shell allows arithmetic expressions to be evaluated, under certain circumstances. And evaluation is done in ***fixed-width integers*** with no check for ~~overflow~~, though division by 0 is trapped and flagged as an error:
 - let  builtin command
 ```bash
 x=1
@@ -124,7 +124,7 @@ echo "${#1}"
 # result: "14"
 ```
 
-For we cann't assign the positional parameter, the following expansion is not allowed:
+For we can't ~~assign~~ the positional parameter, the following expansion is not allowed: :exclamation:
 ```bash
 #! /bin/bash
 
