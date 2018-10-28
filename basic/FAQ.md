@@ -102,3 +102,39 @@ $ ls file[12]
 file1  file2
 ```
 
+## == vs =~
+> For `=~` can't be used between `[` and `]`, we just talk about the difference between `==` and `=~` when used with `[[`.
+
+When the `==` (and !=)operators are used, the string to the **right** of the operator is considered a **pattern** and
+matched according to the rules of **Pattern Matching**.
+```bash
+$ if [[ "string" == * ]]; then echo "yes"; fi
++ [[ string == * ]]
++ echo yes
+yes
+
+$ if [[ "string" =~ * ]]; then echo "yes"; else echo "no"; fi
++ [[ string =~ * ]]
++ echo no
+no
+```
+
+An additional binary operator, `=~`, is available, with the same precedence as `==` and `!=`. When it is used, the
+string to the **right** of the operator is considered an extended regular expression(**ERE**) and matched accordingly.
+```bash
+$ if [[ "string" =~ .* ]]; then echo "yes"; fi
++ [[ string =~ .* ]]
++ echo yes
+yes
+
+$ if [[ "string" == .* ]]; then echo "yes"; else echo "no"; fi
++ [[ string == .* ]]
++ echo no
+no
+
+$  if [[ ".string" = .* ]]; then echo "yes"; fi
++ [[ .string = .* ]]
++ echo yes
+yes
+```
+> In Pattern Matching, the `.` character is not treated specially, unless the shell option dotglob is set.
