@@ -59,3 +59,46 @@ The `*` does not pathname expand to all files in current directory. And the resu
 ## == vs =
 
 The `=` operator is equivalent to `==`. But `==` is a bash extension.
+
+
+## Pathname Expansion vs Pattern Matching
+
+> `Pathname Expansion` = `set +f` + `Pattern Matching`
+
+After word splitting, unless the ***−f*** option has been set, bash scans each word for the characters `*`, `?`, and `[`. If one of these characters appears, then the word is regarded as a pattern, and replaced with an alphabetically sorted list of `filenames` matching the `pattern`.
+
+Example of no pathname expansion:
+```bash
+$ set -f
+$ ls *
++ ls --color=auto '*'
+ls: cannot access '*': No such file or directory
+
+
+$ if [ "*" = * ]; then echo "yes"; fi
++ '[' '*' = '*' ']'
++ echo yes
+yes
+
+
+$ if [[ "string" = * ]]; then echo "yes"; fi
++ [[ string = * ]]
++ echo yes
+yes
+```
+
+Example of pathname expansion:
+```bash
+$ ls
+file1  file2  file3
+
+$ set +f
+$ ls *
++ ls --color=auto file1 file2 file3
+file1  file2  file3 
+
+$ ls file[12]
++ ls --color=auto file1 file2
+file1  file2
+```
+
