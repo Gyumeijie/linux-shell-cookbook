@@ -54,3 +54,8 @@ $ if [[ $(echo "string substring") = * ]]; then echo "yes"; fi
 + echo yes
 ```
 The `*` does not pathname expand to all files in current directory. And the result of `$(echo "string substring")` is not word split into two parts: `string` and `substring`.
+
+
+## == vs =
+
+The `=` operator is equivalent to `==`. But `==` is a bash extension.
