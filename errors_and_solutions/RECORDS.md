@@ -32,8 +32,7 @@ $ echo '"$var"'
 `echo '^'\''data'\''$'`: `'^'` + `\'` + `'data'` + `\'` + `'$'`.
 > '^' for; ^ \' for '; 'data' for data; '$' for $.
 
-When we mixed need `''` and `""`, we have two patterns to choice: `"''"` or `'""'`.
-
+If there is a situation where we have to mix `''` and `""`, then there are two choices: `"''"` or `'""'`.
 For example, if we want `str` be `local data=$(sed 's/\-\{1,2\}\w\+//g' <<<"$@")`, we need assign it in this way:
 `str="local data=\$(sed 's/\-\{1,2\}\w\+//g' <<<"'"$@")'`: `"local data=\$(sed 's/\-\{1,2\}\w\+//g' <<<"` + `'"$@")'`
 The first part is the `"''"` pattern, and the second part is the `'""'`. 
